@@ -65,5 +65,4 @@ router.get("/MovimentoContabil/visualizar/:id", MovimentoContabilController.show
 router.put("/MovimentoContabil/atualizar/:id", MovimentoContabilController.update);
 router.delete("/MovimentoContabil/deletar/:id", MovimentoContabilController.delete);
 
-
 export default router;
