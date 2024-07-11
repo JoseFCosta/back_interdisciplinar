@@ -1,29 +1,51 @@
-import { consulta } from "../database/conexao.js";
+import EscrituraFiscal from "../../models/EscrituraFiscal.js";
 
-class EscrituraFiscalRepositorie {
-    
-  create(pessoa) {
-    const sql = "INSERT INTO contabil.co_EscrituraFiscal SET ?;";
-    return consulta(sql, pessoa, "Não foi possivel cadastrar");
-  }
+const EscrituraFiscalRepositorie = {
+  async create(data) {
+    try {
+      return await EscrituraFiscal.create(data);
+    } catch (error) {
+      throw new Error(`Erro ao criar escritura fiscal no repositório: ${error.message}`);
+    }
+  },
 
-  findAll() {
-    const sql = "SELECT * FROM contabil.co_EscrituraFiscal;";
-    return consulta(sql, "Não foi possivel cadastrar");
-  }
+  async findAll() {
+    try {
+      return await EscrituraFiscal.findAll();
+    } catch (error) {
+      throw new Error(`Erro ao buscar todas as escrituras fiscais no repositório: ${error.message}`);
+    }
+  },
 
-  finById(id) {
-    const sql = "SELECT * FROM contabil.co_EscrituraFiscal WHERE idEscrituraFiscal=?;";
-    return consulta(sql, id, "Não foi possivel cadastrar");
-  }
-  update(pessoa, id) {
-    const sql = "UPDATE contabil.co_EscrituraFiscal SET ? WHERE idEscrituraFiscal=?;";
-    return consulta(sql, [pessoa,id], "Não foi possivel cadastrar");
-  }
-  delete(id) {
-    const sql = "DELETE FROM contabil.co_EscrituraFiscal WHERE idEscrituraFiscal=?;";
-    return consulta(sql, id, "Não foi possivel cadastrar");
-  }
-}
+  async findById(id) {
+    try {
+      return await EscrituraFiscal.findByPk(id);
+    } catch (error) {
+      throw new Error(`Erro ao buscar escritura fiscal por ID no repositório: ${error.message}`);
+    }
+  },
 
-export default new EscrituraFiscalRepositorie();
+  async update(data, id) {
+    try {
+      const escrituraFiscal = await EscrituraFiscal.findByPk(id);
+      if (!escrituraFiscal) return null;
+      await escrituraFiscal.update(data);
+      return escrituraFiscal;
+    } catch (error) {
+      throw new Error(`Erro ao atualizar escritura fiscal no repositório: ${error.message}`);
+    }
+  },
+
+  async delete(id) {
+    try {
+      const escrituraFiscal = await EscrituraFiscal.findByPk(id);
+      if (!escrituraFiscal) return null;
+      await escrituraFiscal.destroy();
+      return escrituraFiscal;
+    } catch (error) {
+      throw new Error(`Erro ao excluir escritura fiscal no repositório: ${error.message}`);
+    }
+  },
+};
+
+export default EscrituraFiscalRepositorie;

@@ -31,11 +31,11 @@ router.delete("/deletar/:id", PessoaController.delete);
 */
 
 //PlanoContas
-router.post("/PlanoContas/cadastrar", PlanoContasController.store);
-router.get("/PlanoContas/visualizar", PlanoContasController.index);
-router.get("/PlanoContas/visualizar/:id", PlanoContasController.show);
-router.put("/PlanoContas/atualizar/:id", PlanoContasController.update);
-router.delete("/PlanoContas/deletar/:id", PlanoContasController.delete);
+router.post('/PlanoContas/cadastrar', PlanoContasController.store);
+router.get('/PlanoContas/visualizar', PlanoContasController.index);
+router.get('/PlanoContas/visualizar/:id', PlanoContasController.show);
+router.put('/PlanoContas/atualizar/:id', PlanoContasController.update);
+router.delete('/PlanoContas/deletar/:id', PlanoContasController.delete);
 
 //EscrituraFiscal
 router.post("/EscrituraFiscal/cadastrar", EscrituraFiscalController.store);

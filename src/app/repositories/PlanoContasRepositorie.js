@@ -1,29 +1,52 @@
-import { consulta } from "../database/conexao.js";
+// PlanoContasRepositorie.js
+import PlanoContas from "../../models/planoContas.js";
 
-class PlanoContasRepositorie {
-    
-  create(PlanoContas) {
-    const sql = "INSERT INTO contabil.co_PlanoContas SET ?;";
-    return consulta(sql, PlanoContas, "Não foi possivel cadastrar");
-  }
+const PlanoContasRepositorie = {
+  async create(data) {
+    try {
+      return await PlanoContas.create(data);
+    } catch (error) {
+      throw new Error(`Erro ao criar plano de contas no repositório: ${error.message}`);
+    }
+  },
 
-  findAll() {
-    const sql = "SELECT * FROM contabil.co_PlanoContas;";
-    return consulta(sql, "Não foi possivel cadastrar");
-  }
+  async findAll() {
+    try {
+      return await PlanoContas.findAll();
+    } catch (error) {
+      throw new Error(`Erro ao buscar todos os planos de contas no repositório: ${error.message}`);
+    }
+  },
 
-  finById(id) {
-    const sql = "SELECT * FROM contabil.co_PlanoContas WHERE idPlanoContas=?;";
-    return consulta(sql, id, "Não foi possivel cadastrar");
-  }
-  update(PlanoContas, id) {
-    const sql = "UPDATE contabil.co_PlanoContas SET ? WHERE idPlanoContas=?;";
-    return consulta(sql, [PlanoContas,id], "Não foi possivel cadastrar");
-  }
-  delete(id) {
-    const sql = "DELETE FROM contabil.co_PlanoContas WHERE idPlanoContas=?;";
-    return consulta(sql, id, "Não foi possivel cadastrar");
-  }
-}
+  async findById(id) {
+    try {
+      return await PlanoContas.findByPk(id);
+    } catch (error) {
+      throw new Error(`Erro ao buscar plano de contas por ID no repositório: ${error.message}`);
+    }
+  },
 
-export default new PlanoContasRepositorie();
+  async update(data, id) {
+    try {
+      const planoContas = await PlanoContas.findByPk(id);
+      if (!planoContas) return null;
+      await planoContas.update(data);
+      return planoContas;
+    } catch (error) {
+      throw new Error(`Erro ao atualizar plano de contas no repositório: ${error.message}`);
+    }
+  },
+
+  async delete(id) {
+    try {
+      const planoContas = await PlanoContas.findByPk(id);
+      if (!planoContas) return null;
+      await planoContas.destroy();
+      return planoContas;
+    } catch (error) {
+      throw new Error(`Erro ao excluir plano de contas no repositório: ${error.message}`);
+    }
+  },
+};
+
+export default PlanoContasRepositorie;

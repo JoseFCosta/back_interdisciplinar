@@ -1,35 +1,73 @@
-import MovimentoContabil from "../repositories/MovimentoContabilRepositorie.js";
+import MovimentoContabilRepositorie from "../repositories/MovimentoContabilRepositorie.js";
 
 class MovimentoContabilController {
-  //CREATE
+  // CREATE
   async store(req, res) {
-    const MovimentoContabil = req.body;
-    const row = await MovimentoContabil.create(MovimentoContabil);
-    res.json(row);
+    try {
+      const movimentoContabil = req.body;
+      const newRow = await MovimentoContabilRepositorie.create(movimentoContabil);
+      res.json(newRow);
+    } catch (error) {
+      console.error('Erro ao criar movimento contábil:', error);
+      res.status(500).json({ error: 'Erro interno ao criar movimento contábil.' });
+    }
   }
-  //GET
+
+  // READ ALL
   async index(req, res) {
-    const row = await MovimentoContabil.findAll();
-    res.json(row);
+    try {
+      const rows = await MovimentoContabilRepositorie.findAll();
+      res.json(rows);
+    } catch (error) {
+      console.error('Erro ao buscar movimentos contábeis:', error);
+      res.status(500).json({ error: 'Erro interno ao buscar movimentos contábeis.' });
+    }
   }
-  //GET por id
+
+  // READ BY ID
   async show(req, res) {
-    const id = req.params.id;
-    const row = await MovimentoContabil.finById(id);
-    res.json(row);
+    try {
+      const id = req.params.id;
+      const row = await MovimentoContabilRepositorie.findById(id);
+      if (!row) {
+        return res.status(404).json({ error: 'Movimento contábil não encontrado.' });
+      }
+      res.json(row);
+    } catch (error) {
+      console.error('Erro ao buscar movimento contábil por ID:', error);
+      res.status(500).json({ error: 'Erro interno ao buscar movimento contábil por ID.' });
+    }
   }
-  //UPDATE
+
+  // UPDATE
   async update(req, res) {
-    const id = req.params.id;
-    const MovimentoContabil = req.body;
-    const row = await MovimentoContabil.update(MovimentoContabil, id);
-    res.json(row);
+    try {
+      const id = req.params.id;
+      const movimentoContabil = req.body;
+      const updatedRow = await MovimentoContabilRepositorie.update(movimentoContabil, id);
+      if (!updatedRow) {
+        return res.status(404).json({ error: 'Movimento contábil não encontrado para atualização.' });
+      }
+      res.json(updatedRow);
+    } catch (error) {
+      console.error('Erro ao atualizar movimento contábil:', error);
+      res.status(500).json({ error: 'Erro interno ao atualizar movimento contábil.' });
+    }
   }
-  //DELETE
+
+  // DELETE
   async delete(req, res) {
-    const id = req.params.id;
-    const row = await MovimentoContabil.delete(id);
-    res.json(row);
+    try {
+      const id = req.params.id;
+      const deletedRow = await MovimentoContabilRepositorie.delete(id);
+      if (!deletedRow) {
+        return res.status(404).json({ error: 'Movimento contábil não encontrado para exclusão.' });
+      }
+      res.json({ message: 'Movimento contábil excluído com sucesso.' });
+    } catch (error) {
+      console.error('Erro ao excluir movimento contábil:', error);
+      res.status(500).json({ error: 'Erro interno ao excluir movimento contábil.' });
+    }
   }
 }
 

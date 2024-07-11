@@ -1,29 +1,51 @@
-import { consulta } from "../database/conexao.js";
+import Itens_da_Venda from "../../models/itensDaVenda.js";
 
-class Itens_da_VendaRepositorie {
-    
-  create(pessoa) {
-    const sql = "INSERT INTO contabil.Itens_da_Venda  SET ?;";
-    return consulta(sql, pessoa, "Não foi possivel cadastrar");
-  }
+const Itens_da_VendaRepositorie = {
+  async create(data) {
+    try {
+      return await Itens_da_Venda.create(data);
+    } catch (error) {
+      throw new Error(`Erro ao criar item da venda no repositório: ${error.message}`);
+    }
+  },
 
-  findAll() {
-    const sql = "SELECT * FROM contabil.Itens_da_Venda ;";
-    return consulta(sql, "Não foi possivel cadastrar");
-  }
+  async findAll() {
+    try {
+      return await Itens_da_Venda.findAll();
+    } catch (error) {
+      throw new Error(`Erro ao buscar todos os itens da venda no repositório: ${error.message}`);
+    }
+  },
 
-  finById(id) {
-    const sql = "SELECT * FROM contabil.Itens_da_Venda  WHERE idItens_da_Venda =?;";
-    return consulta(sql, id, "Não foi possivel cadastrar");
-  }
-  update(pessoa, id) {
-    const sql = "UPDATE contabil.Itens_da_Venda  SET ? WHERE idItens_da_Venda =?;";
-    return consulta(sql, [pessoa,id], "Não foi possivel cadastrar");
-  }
-  delete(id) {
-    const sql = "DELETE FROM contabil.Itens_da_Venda  WHERE idItens_da_Venda =?;";
-    return consulta(sql, id, "Não foi possivel cadastrar");
-  }
-}
+  async findById(id) {
+    try {
+      return await Itens_da_Venda.findByPk(id);
+    } catch (error) {
+      throw new Error(`Erro ao buscar item da venda por ID no repositório: ${error.message}`);
+    }
+  },
 
-export default new Itens_da_VendaRepositorie();
+  async update(data, id) {
+    try {
+      const item = await Itens_da_Venda.findByPk(id);
+      if (!item) return null;
+      await item.update(data);
+      return item;
+    } catch (error) {
+      throw new Error(`Erro ao atualizar item da venda no repositório: ${error.message}`);
+    }
+  },
+
+  async delete(id) {
+    try {
+      const item = await Itens_da_Venda.findByPk(id);
+      if (!item) return null;
+      await item.destroy();
+      return item;
+    } catch (error) {
+      throw new Error(`Erro ao excluir item da venda no repositório: ${error.message}`);
+    }
+  },
+};
+
+export default Itens_da_VendaRepositorie;

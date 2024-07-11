@@ -1,0 +1,37 @@
+{
+  "Co_PlanoContas": [
+    { "CodigoPlano": "1001", "Tipo": "A", "Descricao": "Plano A" },
+    { "CodigoPlano": "1002", "Tipo": "B", "Descricao": "Plano B" },
+    { "CodigoPlano": "1003", "Tipo": "A", "Descricao": "Plano C" },
+    { "CodigoPlano": "1004", "Tipo": "B", "Descricao": "Plano D" },
+    { "CodigoPlano": "1005", "Tipo": "C", "Descricao": "Plano E" }
+  ],
+  "Co_EscrituraFiscal": [
+    { "Descricao": "Escritura 1", "Data": "2024-01-01 10:00:00", "ValorFinal": 1000.50 },
+    { "Descricao": "Escritura 2", "Data": "2024-02-01 11:00:00", "ValorFinal": 2000.75 },
+    { "Descricao": "Escritura 3", "Data": "2024-03-01 12:00:00", "ValorFinal": 3000.00 },
+    { "Descricao": "Escritura 4", "Data": "2024-04-01 13:00:00", "ValorFinal": 4000.25 },
+    { "Descricao": "Escritura 5", "Data": "2024-05-01 14:00:00", "ValorFinal": 5000.50 }
+  ],
+  "Itens_da_Venda": [
+    { "QTD_Itens": 10, "id_Vendas": 1, "cod_espec": "A001", "id_Procedimento": 101, "id_Profissional": 201, "Valor": 100.00, "Forma_Pagamento": "Cartão" },
+    { "QTD_Itens": 20, "id_Vendas": 2, "cod_espec": "A002", "id_Procedimento": 102, "id_Profissional": 202, "Valor": 200.00, "Forma_Pagamento": "Dinheiro" },
+    { "QTD_Itens": 30, "id_Vendas": 3, "cod_espec": "A003", "id_Procedimento": 103, "id_Profissional": 203, "Valor": 300.00, "Forma_Pagamento": "Cartão" },
+    { "QTD_Itens": 40, "id_Vendas": 4, "cod_espec": "A004", "id_Procedimento": 104, "id_Profissional": 204, "Valor": 400.00, "Forma_Pagamento": "Transferência" },
+    { "QTD_Itens": 50, "id_Vendas": 5, "cod_espec": "A005", "id_Procedimento": 105, "id_Profissional": 205, "Valor": 500.00, "Forma_Pagamento": "Boleto" }
+  ],
+  "ITEM_ORDEM_DE_COMPRA": [
+    { "num_ordem_comp": 1001, "id_produto": 301, "qtd_produto": 5, "valor": 150.00, "data_vencimento": "2024-06-01 15:00:00" },
+    { "num_ordem_comp": 1002, "id_produto": 302, "qtd_produto": 10, "valor": 250.00, "data_vencimento": "2024-07-01 16:00:00" },
+    { "num_ordem_comp": 1003, "id_produto": 303, "qtd_produto": 15, "valor": 350.00, "data_vencimento": "2024-08-01 17:00:00" },
+    { "num_ordem_comp": 1004, "id_produto": 304, "qtd_produto": 20, "valor": 450.00, "data_vencimento": "2024-09-01 18:00:00" },
+    { "num_ordem_comp": 1005, "id_produto": 305, "qtd_produto": 25, "valor": 550.00, "data_vencimento": "2024-10-01 19:00:00" }
+  ],
+  "Co_MovimentoContabil": [
+    { "NumeroLancamento": "NL001", "Data": "2024-06-01", "idPlanoContas": 1, "IdEscrituraFiscal": 1, "id_Vendas": 1, "id_item_ordem_comp": 1, "ValorDebito": 500.00, "ValorCredito": 500.00 },
+    { "NumeroLancamento": "NL002", "Data": "2024-06-02", "idPlanoContas": 2, "IdEscrituraFiscal": 2, "id_Vendas": 2, "id_item_ordem_comp": 2, "ValorDebito": 1000.00, "ValorCredito": 1000.00 },
+    { "NumeroLancamento": "NL003", "Data": "2024-06-03", "idPlanoContas": 3, "IdEscrituraFiscal": 3, "id_Vendas": 3, "id_item_ordem_comp": 3, "ValorDebito": 1500.00, "ValorCredito": 1500.00 },
+    { "NumeroLancamento": "NL004", "Data": "2024-06-04", "idPlanoContas": 4, "IdEscrituraFiscal": 4, "id_Vendas": 4, "id_item_ordem_comp": 4, "ValorDebito": 2000.00, "ValorCredito": 2000.00 },
+    { "NumeroLancamento": "NL005", "Data": "2024-06-05", "idPlanoContas": 5, "IdEscrituraFiscal": 5, "id_Vendas": 5, "id_item_ordem_comp": 5, "ValorDebito": 2500.00, "ValorCredito": 2500.00 }
+  ]
+}
