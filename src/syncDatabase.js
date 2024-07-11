@@ -22,7 +22,7 @@ const checkAndSyncModel = async (model) => {
     console.log(`Criando tabela ${tableName}...`);
     await model.sync({ alter: true });
   } else {
-    console.log(`Tabela ${tableName} já existe. Sincronização ignorada.`);
+    console.log(`Tabela ${tableName} já existe. Sincronização ignorada.\n`);
     //await model.sync({ alter: true });
   }
 };
@@ -32,9 +32,6 @@ const syncDatabase = async () => {
     for (const model of models) {
       await checkAndSyncModel(model);
     }
-
-    //await database.sync();
-    //await database.sync({ alter: true });
 
     console.log("Banco de dados sincronizado com sucesso.");
   } catch (error) {
