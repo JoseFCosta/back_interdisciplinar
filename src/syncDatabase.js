@@ -5,7 +5,7 @@ import PlanoContas from "./models/planoContas.js";
 import EscrituraFiscal from "./models/EscrituraFiscal.js";
 import ItensDaVenda from "./models/itensDaVenda.js";
 import ItemOrdemDeCompra from "./models/itemOrdemDeCompra.js";
-import MovimentoContabil from "./models/MovimentoContabil.js";
+import MovimentoContabil from "./models/movimentoContabil.js";
 
 const models = [
   PlanoContas,
@@ -23,7 +23,7 @@ const checkAndSyncModel = async (model) => {
     await model.sync({ alter: true });
   } else {
     console.log(`Tabela ${tableName} já existe. Sincronização ignorada.\n`);
-    //await model.sync({ alter: true });
+    await model.sync({ alter: true });
   }
 };
 
