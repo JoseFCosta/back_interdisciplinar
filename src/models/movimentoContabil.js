@@ -13,7 +13,7 @@ async function generateUniqueNumeroLancamento() {
   const MovimentoContabil = sequelize.models.Co_MovimentoContabil;
 
   while (exists) {
-    numero = Math.floor(Math.random() * 1000000000).toString();
+    numero = Math.floor(Math.random() * 1000).toString();
 
     const count = await MovimentoContabil.count({ where: { NumeroLancamento: numero } });
     if (count === 0) {
@@ -95,7 +95,7 @@ const MovimentoContabil = sequelize.define(
   {
     timestamps: false,
     hooks: {
-      beforeCreate: async (instance) => {
+      beforeCreate: async (instance, options) => {
         instance.NumeroLancamento = await generateUniqueNumeroLancamento();
       },
     },

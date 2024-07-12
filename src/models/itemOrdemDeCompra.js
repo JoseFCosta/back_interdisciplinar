@@ -8,21 +8,44 @@ const ItemOrdemDeCompra = sequelize.define(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      allowNull: false,
     },
     num_ordem_comp: {
-      type: DataTypes.INTEGER,
-    },
-    id_produto: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      allowNull: false,
     },
     qtd_produto: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isValidFormat(value) {
+          // Validar o formato aqui, permitindo números com até 3 dígitos
+          if (!/^\d{1,3}$/.test(value.toString())) {
+            throw new Error(
+              "Formato inválido. Use um número de até 3 dígitos."
+            );
+          }
+        },
+      },
     },
     valor: {
       type: DataTypes.REAL,
+      allowNull: false,
     },
     data_vencimento: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isValidFormat(value) {
+          // Validar o formato aqui
+          if (!/^(\d{2}\/\d{2}\/\d{4} \d{2}:\d{2})$/.test(value)) {
+            throw new Error(
+              'Formato inválido. Use o formato "02/02/2023 13:45".'
+            );
+          }
+        },
+      },
     },
   },
   {
