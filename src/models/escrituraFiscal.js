@@ -10,13 +10,17 @@ const EscrituraFiscal = sequelize.define(
       autoIncrement: true,
     },
     Descricao: {
-      type: DataTypes.STRING(100),
+      type: DataTypes.TEXT,
+      allowNull: false,
     },
     Data: {
       type: DataTypes.DATE,
+      defaultValue: DataTypes.NOW,
+      allowNull: false,
     },
     ValorFinal: {
       type: DataTypes.REAL,
+      allowNull: false,
     },
   },
   {
