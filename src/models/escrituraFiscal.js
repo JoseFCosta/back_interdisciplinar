@@ -20,7 +20,7 @@ const EscrituraFiscal = sequelize.define(
     },
     ValorFinal: {
       type: DataTypes.REAL,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {

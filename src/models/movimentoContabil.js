@@ -36,7 +36,6 @@ const MovimentoContabil = sequelize.define(
     NumeroLancamento: {
       type: DataTypes.STRING(250),
       allowNull: true,
-      unique: true,
     },
     Data: {
       type: DataTypes.DATE,
