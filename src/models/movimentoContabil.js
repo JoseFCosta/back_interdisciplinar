@@ -39,8 +39,7 @@ const MovimentoContabil = sequelize.define(
     },
     Data: {
       type: DataTypes.DATE,
-      defaultValue: DataTypes.NOW,
-      allowNull: false,
+      allowNull: true,
     },
     VerificacaoFinanceiro: {
       type: DataTypes.ENUM,
@@ -93,11 +92,6 @@ const MovimentoContabil = sequelize.define(
   },
   {
     timestamps: false,
-    hooks: {
-      beforeCreate: async (instance, options) => {
-        instance.NumeroLancamento = await generateUniqueNumeroLancamento();
-      },
-    },
   }
 );
 
